@@ -44,9 +44,14 @@ btnAdd.addEventListener(`click`, () =>{
 const btnDelete= document.getElementById("btnDelete");
 btnDelete.addEventListener(`click`, () =>{
     let id= document.getElementById("inpId").value;
-    let row = document.querySelector(`#row${id}`);
+    if(list1.find(id) ==  null){
+        text.innerHTML = "El producto con `ID " + id + "` ¡¡NO EXISTE!!";
+    } else{
+        let row = document.querySelector(`#row${id}`);
         row.remove();
-    list1.delete(id);
+        list1.delete(id);
+        }
+
     clear();
 })
 
@@ -67,14 +72,18 @@ btnFind.addEventListener(`click`, () =>{
     
     let id= document.getElementById("inpId").value;
     let product= list1.find(id);
-    let name = product.getName();
-    let amount = product.getAmount();
-    let price = product.getPrice();
-    let value = product.getValue();
-
-    
     let text= document.getElementById("text");
-    text.innerHTML = "PRODUCTO BUSCADO: ID:" + id + " Nombre: " + name + " Cantidad: " + amount + " Precio: $" + price + " Total: $" + value;
+
+    if(product ==  null){
+        text.innerHTML = "Producto con `ID: " + id + "` ¡¡NO ENCONTRADO!!";
+    } else{
+        let name = product.getName();
+        let amount = product.getAmount();
+        let price = product.getPrice();
+        let value = product.getValue();
+
+        text.innerHTML = "PRODUCTO BUSCADO: ID:" + id + " Nombre: " + name + " Cantidad: " + amount + " Precio: $" + price + " Total: $" + value;
+    }
 
     clear();
 })

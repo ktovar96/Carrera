@@ -18,8 +18,11 @@ export default class List {
         for(let i = 0; i < this._product.length; i++){
             if(this._product[i].getId() == id){
                 return i;
+            }
         }
-    }
+        if(i < 0){
+            return null;
+        }
     }
 
     delete(id){
@@ -52,7 +55,7 @@ export default class List {
 
     getInv(){
         let info = 0;
-        for(let i =this._product.length; i > 0 ; i++){
+        for(let i = this._product.length - 1 ; i > 0 ; i++){
             info += this._product[i].info(); //no se porque aquí me marca como indefinido el this._product[i] :(
         }
         return info;
