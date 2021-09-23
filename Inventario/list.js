@@ -54,10 +54,11 @@ export default class List {
     }
 
     getInv(){
-        let info = 0;
-        for(let i = this._product.length - 1 ; i > 0 ; i++){
-            info += this._product[i].info(); //no se porque aquí me marca como indefinido el this._product[i] :(
-        }
+        let info = ``;
+        console.log(this._product);
+        for(let i = this._product.length - 1 ; i >= 0 ; i--){
+            info += this._product[i].info(); 
+            }
         return info;
     }
 
