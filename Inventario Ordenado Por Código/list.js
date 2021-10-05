@@ -26,7 +26,7 @@ export default class List {
         //this._product._findPos(menor.getId());
     }*/
 
-    acomodar(){
+    /*acomodar(){
         if (this._product.length > 1){
             
         let menor = this._product[0]; 
@@ -38,7 +38,7 @@ export default class List {
                         console.log(menor);
                         } else {
                             menor= this._product[i + 1];
-                            console.log(menor);
+                            console.log(menor); 
                         }
                 a = this._product[i];
                 this._product[i] = menor;
@@ -47,7 +47,20 @@ export default class List {
                   }
             }
             
-        }
+        }*/
+
+    _hallarPos(id){
+
+        for(let i = 0; i < this._product.length; i++){
+            if(this._product[i].getId() < id){
+                this._product[i] = i;
+            } else {
+                this._product[i] = id;
+                return i;
+            }
+    }
+
+    }
             
     
     _findPos(id){
