@@ -61,7 +61,13 @@ export default class List {
         }
         return -1;
     }
-            
+    
+    _recorrerUno(pos){
+        for (let i = this._product.length - 2; i = pos; i--){
+            this._product[i + 1] = this._product[i];
+        }
+        return this._product;
+    }
     
     _findPos(id){
         for(let i = 0; i < this._product.length; i++){
