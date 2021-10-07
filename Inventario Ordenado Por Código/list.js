@@ -50,16 +50,16 @@ export default class List {
         }*/
 
     _hallarPos(id){
-
+        let pos= 0;
         for(let i = 0; i < this._product.length; i++){
-            if(this._product[i].getId() < id){
-                this._product[i] = i;
-            } else {
-                this._product[i] = id;
-                return i;
+            if(this._product[i].getId() > id){
+                pos= i;
+                return pos;
+            } else if (id > this._product[this._product.length  - 1]){
+                pos = this._product.length; 
             }
-    }
-
+        }
+        return -1;
     }
             
     
@@ -69,10 +69,9 @@ export default class List {
                 return i;
             }
         }
-        if(i < 0){
             return null;
         }
-    }
+    
 
     delete(id){
         let pos= this._findPos(id)
