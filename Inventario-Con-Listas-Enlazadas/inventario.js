@@ -27,10 +27,9 @@ export default class Inventario{
             aux = aux.siguiente;
             if (aux.getId() == id){
                 return aux;
-            } else{
-                return null;
-            }
+            } 
         }
+
     }
 
     eliminar(id){
@@ -120,15 +119,21 @@ export default class Inventario{
     insertar(pos, nuevo){
         let aux =  this.inicio;
         let i = 0;
-            while (aux != null){
-                aux= aux.siguiente;
-                    i++;
-                    if(i == pos){
-                        nuevo.siguiente = aux.siguiente.siguiente;
-                        aux.siguiente = nuevo;
-                        //nuevo.siguiente = aux.siguiente.siguiente;
-                        return nuevo;
-                    }
+        if (pos == 0){
+            this.inicio = nuevo;
+            nuevo.siguiente = aux;
+            return nuevo;
+        }
+        while (aux != null){
+            if(i == pos - 1){
+                nuevo.siguiente = aux.siguiente;
+                aux.siguiente = nuevo;
+                //nuevo.siguiente = aux.siguiente.siguiente;
+                return nuevo;
             }
+            aux= aux.siguiente;
+            i++;
+        }
+        return null;
     }
 }
