@@ -38,7 +38,7 @@ btnAdd.addEventListener(`click`, () =>{
     let amount= document.getElementById("inpAmount").value;
     let price= document.getElementById("inpPrice").value;
     let producto = new Producto(id, name, amount, price);
-    let added= inventario.agregar(producto);
+    let added= inventario.agregar2(producto);
         if(added==null){
             clear();
             return
@@ -58,7 +58,7 @@ btnAdd.addEventListener(`click`, () =>{
     colPrice.innerHTML = producto.getPrice();
     colValue.innerHTML = producto.getValue();
     clear();
-    console.log(inventario);
+    console.log(inventario);    
 }) 
 
 const btnDelete= document.getElementById("btnDelete");
