@@ -1,22 +1,24 @@
 export default class Inventario{
     constructor(){
         this.inicio = null;
-        this.final = null;
+        this.final=null;
     }
 
-    agregar(nuevo){
+    /*agregar(nuevo){
         let temp = this.inicio;
-        let antemp = temp.anterior;
 
         while (temp != null){
+            let antemp = temp.anterior;
             if (nuevo.getId() >= temp.getId()){
                 antemp = temp;
                 temp = temp.siguiente;
+                this._insertarEntre(temp, antemp, nuevo);
             } else {
                 break;
             }            
         }
-        this._insertarEntre(temp, antemp, nuevo);
+        this._insertarEntre(temp, null, nuevo);
+        return nuevo;
     }
 
     _insertarEntre(dato, datoAnterior, nuevo){
@@ -34,41 +36,75 @@ export default class Inventario{
         } else {
             this.inicio = nuevo;
         }
+        return nuevo;
+    }*/
+
+    agregar2(nuevo){
+        let temp = this.inicio;
+        if (this.inicio == null){
+            this.inicio = nuevo;
+            return nuevo;
+        } else if (nuevo.getId() < temp.getId()){
+            nuevo.siguiente = temp;
+            temp.anterior = nuevo;
+            this.inicio = nuevo;
+            return nuevo; 
+        }
+        if (this.encontrarProducto(nuevo.getId()) == null){
+            while(temp.siguiente != null){
+            temp = temp.siguiente;
+            if(temp.getId() > nuevo.getId()){ 
+            nuevo.siguiente = temp;
+            nuevo.anterior= temp.anterior;
+            temp.anterior= nuevo;
+            nuevo.anterior.siguiente= nuevo;
+            return nuevo;
+        }else {
+            temp.siguiente = nuevo;
+            nuevo.anterior = temp;
+            return nuevo;
+        }
+    }   
+    return null;
     }
-
-
+}  
     encontrarProducto(id){
-        let aux = this.inicio; 
-        while(aux.siguiente != null){
-            aux = aux.siguiente;
+        let aux= this.inicio;
+        while (aux != null){
             if (aux.getId() == id){
                 return aux;
-            } 
+            }
+        else if (aux.getId() < id)
+            return null;
+            aux= aux.siguiente;
         }
-
     }
 
     eliminar(id){
-        let elim = null;
+        let temp = this.inicio;
+        
+        if (temp.getId() == id){
+            this.inicio = temp.siguiente;
+            this.inicio.anterior = null;
+            temp.anterior = null;
+            temp.siguiente = null;
+            return temp;
+        }
 
-        if(this.inicio.getId() == id){
-            elim=this.inicio;
-            this.inicio = this.inicio.siguiente;
-            elim.siguiente = null;
-            return elim;
-        }
-        let aux= this.inicio;
-        while(aux.siguiente != null && elim == null){
-            if(aux.siguiente.getId() == id){
-                elim = aux.siguiente;
-                aux.siguiente = aux.siguiente.siguiente;
-                elim.siguiente = null;
-                return elim;
-            } else {
-                aux = aux.siguiente;
+        while (temp.siguiente != null){
+            temp = temp.siguiente;
+            if (id == temp.getId()){
+                temp.anterior.siguiente = temp.siguiente;
+                temp.siguiente.anterior = temp.anterior;
+                temp.anterior = null;
+                temp.siguiente = null;
+                return temp;
             }
+            temp.anterior.siguiente = null;
+            temp.anterior= null;
+            temp.siguiente = null;
+            return temp;
         }
-        return elim;
     }
 
     listar2(){
