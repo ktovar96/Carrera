@@ -1,7 +1,6 @@
 export default class Inventario{
     constructor(){
         this.inicio = null;
-        this.final=null;
     }
 
     /*agregar(nuevo){
@@ -51,31 +50,31 @@ export default class Inventario{
             return nuevo; 
         }
         if (this.encontrarProducto(nuevo.getId()) == null){
-            while(temp.siguiente != null){
-            temp = temp.siguiente;
-            if(temp.getId() > nuevo.getId()){ 
-            nuevo.siguiente = temp;
-            nuevo.anterior= temp.anterior;
-            temp.anterior= nuevo;
-            nuevo.anterior.siguiente= nuevo;
-            return nuevo;
-        }else {
-            temp.siguiente = nuevo;
-            nuevo.anterior = temp;
-            return nuevo;
+                while(temp.siguiente != null){
+                temp = temp.siguiente;
+                if(nuevo.getId() < temp.getId() && nuevo.getId()  > temp.anterior.getId()){ 
+                    nuevo.siguiente = temp;
+                    nuevo.anterior = temp.anterior;
+                    temp.anterior = nuevo;
+                    nuevo.anterior.siguiente = nuevo;
+                return nuevo;
         }
-    }   
-    return null;
     }
-}  
+        temp.siguiente = nuevo;
+        nuevo.anterior = temp;
+        return nuevo;
+        }
+    return null;
+    }  
+
     encontrarProducto(id){
         let aux= this.inicio;
         while (aux != null){
-            if (aux.getId() == id){
-                return aux;
+            if (aux.getId() > id){
+                return null;
             }
-        else if (aux.getId() < id)
-            return null;
+        else if (aux.getId() == id)
+            return aux;
             aux= aux.siguiente;
         }
     }
@@ -152,4 +151,18 @@ export default class Inventario{
         }
     }
 
+    encontrarPos(producto){
+        let i =-1;
+        let pos = -1;
+        let temp = this.inicio;
+        while (temp.siguiente != null){
+            i += 1;
+            pos += 1;
+            if (producto.getId() < temp.getId() && producto.getId()  > temp.anterior.getId()){
+                return pos;
+            }
+        }
+        pos = -1;
+        return pos;
+    }
 }
