@@ -42,7 +42,7 @@ btnAdd.addEventListener(`click`, () =>{
         if(added==null){
             clear();
             return
-        }
+        } 
     let table = document.querySelector("#table");
     let row =  table.insertRow(-1);
     let colId= row.insertCell(0);
@@ -85,34 +85,4 @@ const btnGetInv= document.getElementById("btnGetInv");
 btnGetInv.addEventListener(`click`, () =>{
     let info= document.getElementById("info");
     info.innerHTML = inventario.listarInv();
-})
-
-const btnIns= document.getElementById("btnIns");
-btnIns.addEventListener(`click`, () =>{
-    let pos= document.getElementById("pos").value;
-    let id= document.getElementById("inpId").value;
-    let name= document.getElementById("inpName").value;
-    let amount= document.getElementById("inpAmount").value;
-    let price= document.getElementById("inpPrice").value;
-    let nuevo = new Producto (id, name, amount, price);
-    console.log(nuevo)
-
-    let table = document.querySelector("#table");
-    let row =  table.insertRow(parseInt(pos) + 1);
-    let colId= row.insertCell(0);
-    let colName= row.insertCell(1);
-    let colAmount= row.insertCell(2);
-    let colPrice= row.insertCell(3);
-    let colValue= row.insertCell(4);
-
-    row.setAttribute("id", `row${nuevo.getId()}` );
-    colId.innerHTML = nuevo.getId();
-    colName.innerHTML = nuevo.getName();
-    colAmount.innerHTML = nuevo.getAmount();
-    colPrice.innerHTML = nuevo.getPrice();
-    colValue.innerHTML = nuevo.getValue();
-    clear();
-
-    inventario.insertar(pos, nuevo);
-    console.log(inventario);
 })
